@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.middleware;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -8,11 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddCors(opt=>
+{
+opt.AddPolicy("CorsPolicy",policy =>
+{
+policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3001");
+});
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
