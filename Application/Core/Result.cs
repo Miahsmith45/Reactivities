@@ -1,3 +1,6 @@
+using Application.Activities;
+using Domain;
+
 namespace Application.Core
 {
     public class Result<T>
@@ -10,5 +13,10 @@ namespace Application.Core
 
         public static Result<T> Success(T value) => new Result<T> {IsSuccess = true, Value = value};
         public static Result<T> Failure(string error) => new Result<T> {IsSuccess = false, Error = error};
+
+        internal static Result<List<ActivityDto>> Success(List<Activity> activitiesToReturn)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
