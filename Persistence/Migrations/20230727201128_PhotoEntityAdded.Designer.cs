@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -10,9 +11,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230727201128_PhotoEntityAdded")]
+    partial class PhotoEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
@@ -308,7 +311,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Photo", b =>
                 {
                     b.HasOne("Domain.AppUser", null)
-                        .WithMany("Photos")
+                        .WithMany("photos")
                         .HasForeignKey("AppUserId");
                 });
 
@@ -372,7 +375,7 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("Activities");
 
-                    b.Navigation("Photos");
+                    b.Navigation("photos");
                 });
 #pragma warning restore 612, 618
         }
