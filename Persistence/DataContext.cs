@@ -14,10 +14,11 @@ namespace Persistence
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
 
         public DbSet<Photo> Photos { get; set; }
-        public List<Activity> Map<T>(List<Activity> activities)
-        {
-            throw new NotImplementedException();
-        }
+        public DbSet<Comment> Comments { get; set; }
+        // public List<Activity> Map<T>(List<Activity> activities)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,6 +35,11 @@ namespace Persistence
             .HasOne(u => u.Activity)
             .WithMany(a=> a.Attendees)
             .HasForeignKey(aa=> aa.ActivityId);
+
+            builder.Entity<Comment>()
+            .HasOne(a=> a.Activity)
+            .WithMany(c => c.Comments)
+            .OnDelete(DeleteBehavior.Cascade);
         }
 
     }
