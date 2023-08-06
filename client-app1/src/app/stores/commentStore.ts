@@ -1,7 +1,6 @@
 import { HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { ChatComment } from "../layout/models/comment";
 import { makeAutoObservable, runInAction, values } from "mobx";
-import { Activity } from "../layout/models/activity";
 import { store } from "./store";
 
 export default class CommentStore {
